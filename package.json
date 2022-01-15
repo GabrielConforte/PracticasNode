@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "express": "^4.17.2",
+    "moment": "^2.29.1"
+  },
+  "name": "server-uno",
+  "version": "1.0.0",
+  "description": "Aprendiendo sobre npm y creando mi primer server",
+  "main": "main.js",
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+      "dev": "nodemon main.js",
+    "start": "node main.js"
+  },
+  "keywords": [
+    "NPM",
+    "EXPRESS"
+  ],
+  "author": "Gabriel Conforte",
+  "license": "ISC"
+}
