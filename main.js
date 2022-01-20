@@ -10,7 +10,7 @@ const express = require('express');
 const moment = require('moment');
 const contenedor = require('./contenedor');
 const app = express();
-const PORT = 3000;
+const PORT = 8080;
 let contador = 0;
 app.get("/", (req, res, next) => {
     console.log(req)
