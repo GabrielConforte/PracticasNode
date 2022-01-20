@@ -5,32 +5,19 @@ Realizar un proyecto de servidor basado en node.js que utilice el middleware exp
 2) Ruta get '/productoRandom' que devuelva un producto elegido al azar entre todos los productos disponibles
 Incluir un archivo de texto 'productos.txt' y utilizar la clase Contenedor del desafío anterior para acceder a los datos persistidos del servidor. */
 
-
 const express = require('express');
-const moment = require('moment');
 const contenedor = require('./contenedor');
 const app = express();
 const PORT = 8080;
-let contador = 0;
+
 app.get("/", (req, res, next) => {
     console.log(req)
     res.send("<h1 style='color:blue'> hola mundillo </h1>");
     });
-app.get("/visitas",(req,res,next)=>{
-    contador++;
-    res.send(`Hoy tuvimos ${contador} visitas`);
-
-    });
-
-app.get("/fyh", (req, res, next) => {
-    res.json({fyh: moment().format("YYYY-MM-DD HH:mm:ss")});
-    });
-
 
 const server = app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
 
 app.get("/productos", (req, res, next) => {
     contenedor.getAll().then(data => {
