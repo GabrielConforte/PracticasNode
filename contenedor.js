@@ -87,16 +87,10 @@ class Contenedor {
 
 
 async function main() {
-    //envia los metodos a main.js
-    const contenedor = new Contenedor();
-    const data = await contenedor.getAll();
-
-
+   
 }
 
 main();
-
-// importa todos los metodos
 module.exports = {
     save: Contenedor.prototype.save,
     getById: Contenedor.prototype.getById,
