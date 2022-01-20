@@ -12,6 +12,7 @@
 
 
 const fs = require('fs');
+const archivoTxt = 'productos.txt';
 
 class Contenedor {
 
@@ -25,7 +26,7 @@ class Contenedor {
                 objeto.id = max.id + 1;
                 contenedor.push(objeto);
                 let json = JSON.stringify(contenedor);
-                await fs.promises.writeFile('./contenedor.txt', json);
+                await fs.promises.writeFile(archivoTxt, json);
             return objeto.id;
         }catch(error){
             console.log(error);
@@ -52,10 +53,10 @@ class Contenedor {
     }
 
     //devuelve un arreglo con todos los objetos
-    async getAll() { if (!fs.existsSync('./contenedor.txt')) {
-        fs.promises.writeFile('./contenedor.txt', '[]');
+    async getAll() { if (!fs.existsSync(archivoTxt)) {
+        fs.promises.writeFile(archivoTxt, '[]');
     }try{
-        let dato = await fs.promises.readFile('./contenedor.txt', 'utf8')
+        let dato = await fs.promises.readFile(archivoTxt, 'utf8')
         return dato;
     }catch(error){
         console.log(error);
@@ -70,7 +71,7 @@ class Contenedor {
         contenedor = contenedor.filter(obj => obj.id != id);
         if(objeto!=undefined){
             let json = JSON.stringify(contenedor);
-            fs.promises.writeFile('./contenedor.txt', json);
+            fs.promises.writeFile(archivoTxt, json);
             console.log('objeto eliminado');}
         else{
             console.log('no existe el objeto');
@@ -79,7 +80,7 @@ class Contenedor {
 
     //elimina todos los objetos
     async deleteAll() {
-        await fs.promises.writeFile('./contenedor.txt', '[]');
+        await fs.promises.writeFile(archivoTxt, '[]');
         console.log('todos los objetos fueron eliminados');
     }
 }
