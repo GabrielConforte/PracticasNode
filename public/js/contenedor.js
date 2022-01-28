@@ -64,17 +64,32 @@ class Contenedor {
         await fs.promises.writeFile(archivoTxt, '[]');
         console.log('todos los objetos fueron eliminados');
     }
+
+    //actualizar
+    async update(id, objeto) {
+        let contenedor = await this.getAll();
+        contenedor = JSON.parse(contenedor);
+        let objetoActualizado = contenedor.find(obj => obj.id == id);
+        if(objetoActualizado!=undefined){
+            objetoActualizado.title = objeto.title;
+            objetoActualizado.price = objeto.price;
+            let json = JSON.stringify(contenedor);
+            fs.promises.writeFile(archivoTxt, json);
+            console.log('objeto actualizado');
+        }
+        else{
+            console.log('no existe el objeto');
+        }
+    }
+
 }
 
-async function main() {
-   
-}
-
-main();
 module.exports = {
     save: Contenedor.prototype.save,
     getById: Contenedor.prototype.getById,
     getAll: Contenedor.prototype.getAll,
     deleteById: Contenedor.prototype.deleteById,
-    deleteAll: Contenedor.prototype.deleteAll
+    deleteAll: Contenedor.prototype.deleteAll,
+    update: Contenedor.prototype.update
 }
+

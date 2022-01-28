@@ -1,4 +1,5 @@
 {
+  "type": "commonjs",
   "dependencies": {
     "express": "^4.17.2",
     "moment": "^2.29.1"
@@ -12,13 +13,22 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon main.js",
-    "start": "node main.js"
+    "dev": "nodemon public/js/main.js",
+    "start": "node public/js/main.js"
   },
   "keywords": [
     "NPM",
     "EXPRESS"
   ],
   "author": "Gabriel Conforte",
-  "license": "ISC"
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/GabrielConforte/PracticasNode.git"
+  },
+  "bugs": {
+    "url": "https://github.com/GabrielConforte/PracticasNode/issues"
+  },
+  "homepage": "https://github.com/GabrielConforte/PracticasNode#readme"
+  
 }
