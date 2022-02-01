@@ -6,7 +6,7 @@ PUT '/api/productos/:id' -> recibe y actualiza un producto según su id.
 DELETE '/api/productos/:id' -> elimina un producto según su id. */
 
 const express = require('express');
-const contenedor = require('./contenedor');
+const contenedor = require('./controladores/contenedor');
 const app = express();
 const PORT = 3001;
 const server = app.listen(PORT, () => {
@@ -15,7 +15,7 @@ const server = app.listen(PORT, () => {
 
 const {Router} = express
 const routerApi = new Router()
-console.log("dou")
+
 //busca el index.html
 app.use(express.static('public')); 
 app.use(express.json());
@@ -31,15 +31,21 @@ routerApi.get('/', (req, res, next) =>  {
 });
 
 //GET '/api/productos/:id' -> devuelve un producto según su id.
-routerApi.get('/:id', (req, res, next) => {
-
-    contenedor.getById(req.params.id).then(data => {
+routerApi.get('/:id', async (req, res, next) => {
+    const id = req.params.id;
+    const producto = await contenedor.getById(id);
+    if(producto.id!=undefined){
+        res.json(producto);
+    }else{
+        res.json({error : "no existe el objeto"});
+    }
+    /* contenedor.getById(req.params.id).then(data => {
         if(data.id!=undefined){
             res.json(data);}
         else{
             res.json({ error : 'producto no encontrado' });
         }
-    });
+    }); */
 });
 
 routerApi.post('/', (req, res, next) => {
