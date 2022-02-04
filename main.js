@@ -16,60 +16,29 @@ const server = app.listen(PORT, () => {
 const {Router} = express
 const routerApi = new Router()
 
-//busca el index.html
-app.use(express.static('public')); 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-//GET '/api/productos' -> devuelve todos los productos.
-routerApi.get('/', (req, res, next) =>  {
-    contenedor.getAll().then(data => {
-        let productos = JSON.parse(data);
-        res.json(productos);
-    });
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }))
+app.set('view engine', 'ejs');app.set("views", "./views/ejs");
 
+
+app.get('/', (req, res, next) =>  {
+    res.render('index');
 });
 
-//GET '/api/productos/:id' -> devuelve un producto según su id.
-routerApi.get('/:id', async (req, res, next) => {
-    const id = req.params.id;
-    const producto = await contenedor.getById(id);
-    if(producto.id!=undefined){
-        res.json(producto);
-    }else{
-        res.json({error : "no existe el objeto"});
-    }
-    /* contenedor.getById(req.params.id).then(data => {
-        if(data.id!=undefined){
-            res.json(data);}
-        else{
-            res.json({ error : 'producto no encontrado' });
-        }
-    }); */
+app.get('/productos', async (req, res, next) =>  {
+    let productos = await contenedor.getAll();
+    productos = JSON.parse(productos);
+    res.render('listado', {productos});
 });
 
-routerApi.post('/', (req, res, next) => {
+app.post("/productos", async(req,res,next)=>{
     let producto = req.body;
-    contenedor.save(producto).then(data => {
-        res.json({atencion: "producto guardado"});
-    });
-});
-
-//put -> recibe y actualiza un producto según su id.
-routerApi.put('/:id', (req, res, next) => {
-    let producto = req.body;
-    contenedor.update(req.params.id, producto).then(data => {
-        res.json(data);
-    });
-});
-
-routerApi.delete('/:id', (req, res, next) => {
-    contenedor.deleteById(req.params.id).then(data => {
-        res.json({ atencion: 'producto eliminado' });
-    });
-});
-app.use('/api/productos', routerApi);
-
+    await contenedor.save(producto);
+    res.redirect('/')});
 
 //mensajes para errores del servidor
 app.use((err, req, res, next) => {
