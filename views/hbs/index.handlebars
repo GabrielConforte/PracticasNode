@@ -1,0 +1,31 @@
+    <h3>Registrar un producto</h3>
+     <form class="prod-form" id="add" action="/productos" method="POST">
+    <div class="d-flex flex-column align-items-center">
+        <input type="text" name="title" class="form-control" placeholder="Titulo" style="margin-bottom: 10px;">
+        <input type="number" name="price" class="form-control" placeholder="Precio" style="margin-bottom: 10px;">
+        <input type="text" name="url" class="form-control" style="margin-bottom: 10px;">
+        <button type="submit" class="btn btn-primary">Ingresar Producto</button>
+    </div>                     
+    <h3>Productos Registrados</h3>
+    <table class="table table-striped table-dark m-auto">
+            <thead>
+                <tr>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Precio</th>
+                </tr>
+            </thead>
+            {{#if productos.length}}
+            {{#each productos}}
+                    <tr>
+                        <td>{{this.title}}</td>
+                        <td>{{this.price}}</td> 
+                        <td><img class="" width="50px"  src={{this.thumbnail}}></td>
+                    </tr>
+       
+            {{/each}}
+            {{else}}
+            <tr>
+                <td colspan="2">No hay productos registrados</td>
+            </tr>
+            {{/if}}
+    </table>

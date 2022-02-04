@@ -1,0 +1,15 @@
+
+<h1>Registrar Producto</h1>
+
+ <form class="prod-form" id="add" action="/productos" method="POST">
+    <div class="d-flex flex-column align-items-center">
+        <input type="text" name="title" class="form-control" placeholder="Titulo" style="margin-bottom: 10px;">
+        <input type="number" name="price" class="form-control" placeholder="Precio" style="margin-bottom: 10px;">
+        <input type="text" name="url" class="form-control" placeholder="URL de la imagen" style="margin-bottom: 10px;">
+        <button type="submit" class="btn btn-primary">Ingresar Producto</button>
+    </div>
+</form>
+
+<div class="mt-2 d-flex flex-column align-items-center">
+    <a class="btn btn-primary" href="/productos">Listado Productos</a>
+</div>
